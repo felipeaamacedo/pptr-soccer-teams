@@ -1,0 +1,25 @@
+{
+  "name": "pptr-soccer-teams",
+  "version": "1.0.0",
+  "description": "Puppeteer code that evaluates certain aspects of brasilian soccer teams",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipeaamacedo/pptr-soccer-teams.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipeaamacedo/pptr-soccer-teams/issues"
+  },
+  "homepage": "https://github.com/felipeaamacedo/pptr-soccer-teams#readme",
+  "dependencies": {
+    "@types/puppeteer": "^5.4.3",
+    "puppeteer": "^9.0.0",
+    "typescript": "^4.2.4"
+  }
+}
