@@ -1,31 +1,13 @@
 import puppeteer from 'puppeteer'
 import fs from 'fs'
+import * as clubData from './data'
 
 (async () => {
-    const data: {teamName:string, website:string, cssSelector:string[]}[] = [
-        { 
-            teamName: "Botafogo", 
-            website: "https://soubotafogo.bfr.com.br/#/publico/home", 
-            cssSelector: [".sb_23"] 
-        },
-        { 
-            teamName: "Santos", 
-            website: "https://sociorei.com/", 
-            cssSelector: ["body > app-root > div > app-header > header > div > div > app-counter > div > div > div.counter"] 
-        },
-        {   
-            teamName: "Vasco", 
-            website: "https://sociogigante.com/", 
-            cssSelector: [
-                ".header-row-1-right > app-scoreboard:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)", 
-                ".header-row-1-right > app-scoreboard:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)", 
-                ".header-row-1-right > app-scoreboard:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1)", 
-                ".header-row-1-right > app-scoreboard:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1)", 
-                ".header-row-1-right > app-scoreboard:nth-child(1) > div:nth-child(1) > div:nth-child(5) > div:nth-child(1)",
-                ".header-row-1-right > app-scoreboard:nth-child(1) > div:nth-child(1) > div:nth-child(6) > div:nth-child(1)"
-            ]
-        }
-    ]
+    /**
+     * Getting input data from ./data.ts
+     */
+    const data = clubData.data
+
     const scrapData:{teamName:string, nuMembers:string}[] = []
 
     /**
@@ -102,8 +84,35 @@ import fs from 'fs'
     console.log('---------------------------') 
     console.log(scrapData)
 
-    console.log('Creating file at "./output/scrapResult.txt')
-    await fs.writeFileSync('./outputs/scrapResult.txt', scrapData.toString())
+
+    /**
+    * Creating file formated to work on excel 
+    */
+    let filePath:string = '../outputs/scrapResult.txt'
+    console.log(`Checking if file exists at "${filePath}"`)
+
+    if(fs.existsSync(filePath)){
+        console.log(`File exists at ${filePath} and it is being deleted!`)
+        fs.unlink(filePath, (err)=>{
+            if(err) throw err;
+            console.log(`"${filePath}" was deleted!`)
+        })
+    }else{
+        console.log(`PERFECT! File does not exist.`);
+    }
+
+    console.log(`Creating new file at "${filePath}"`)
+    let scrapDataFile = fs.createWriteStream(filePath, {
+        flags:'a'  // "a" means append, old data will be preserved
+    })
+
+    //Creating table heading
+    scrapDataFile.write('TEAM NAME, NUMBER OF TEAM MEMBERS \r\n')
+
+    //Looping table content
+    for(let i=0; i<scrapData.length; i++){
+        scrapDataFile.write(`${scrapData[i].teamName}, ${scrapData[i].nuMembers} \r\n`)
+    }
 
     // Closing browser
     await browser.close()
