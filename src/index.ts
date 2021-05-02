@@ -14,7 +14,7 @@ import * as clubData from './data'
      * Opening browser and a new tab
      */
     const browser = await puppeteer.launch({
-        headless: false,
+        // headless: false,
     });
     const page = await browser.newPage()
     const timeout = 5000
