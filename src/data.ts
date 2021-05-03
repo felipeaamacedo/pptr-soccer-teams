@@ -24,7 +24,8 @@ export const data: {teamName:string, website:string, cssSelector:string[]}[] = [
                 ".header-row-1-right > app-scoreboard:nth-child(1) > div:nth-child(1) > div:nth-child(5) > div:nth-child(1)",
                 ".header-row-1-right > app-scoreboard:nth-child(1) > div:nth-child(1) > div:nth-child(6) > div:nth-child(1)",
             ]
-        },{
+        },
+        {
             teamName:"Flamengo",
             website: "https://www.nrnoficial.com.br/",
             cssSelector: [
