@@ -4,7 +4,7 @@ export const data: {teamName:string, website:string, cssSelector:string[]}[] = [
             website: "https://soubotafogo.bfr.com.br/#/publico/home", 
             cssSelector: [
                 ".sb_23",
-            ] 
+            ],
         },
         { 
             teamName: "Santos", 
@@ -13,7 +13,7 @@ export const data: {teamName:string, website:string, cssSelector:string[]}[] = [
                 "body > app-root > div > app-header > header > div > div > app-counter > div > div > div.counter",
             ] 
         },
-        {   
+        { 
             teamName: "Vasco", 
             website: "https://sociogigante.com/", 
             cssSelector: [
